@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Testing suite</title>
+        <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.17.2.css">
+        <script src="js/library.js"></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture">
+            <form id="googleForm" method="post" action="">
+                <fieldset>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
+                        <label for="name">Name</label>
+                        <div class="invalid" id="textInvalid">Invalid input</div>
+                    </div>
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="birthDate" placeholder="Birthdate" name="Birthdate" onblur="ValidateDateInput('birthDate', 'dateInvalid')" required>
+                        <label for="Birthdate">Birthday</label>
+                        <div class="invalid" id="dateInvalid">Invalid input</div>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="phoneNumber" placeholder="Phone number" name="Phone number" required>
+                        <label for="Phone number">Phone number (ex: 715-420-6969)</label>
+                        <div class="invalid" id="phoneInvalid">Invalid input</div>
+                    </div>
+                    <div class="form-floating">
+                        <select class="form-select" id="state" placeholder="State" name="State" onblur="ValidateSelectList('state', 'stateInvalid')" required>
+                            <option value="---">---</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                            <option value="AS">American Samoa</option>
+                            <option value="GU">Guam</option>
+                            <option value="MP">Northern Mariana Islands</option>
+                            <option value="PR">Puerto Rico</option>
+                            <option value="UM">United States Minor Outlying Islands</option>
+                            <option value="VI">Virgin Islands</option>
+                        </select>
+                        <label for="state" class="form-label">State (select one)</label>
+                        <div class="invalid" id="stateInvalid">Invalid input</div>
+                    </div>
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="number" placeholder="Favorite number" name="Favorite number" required>
+                        <label for="Favorite number">Favorite number</label>
+                        <div class="invalid" id="numberInvalid">Invalid input</div>
+                    </div>
+                    <div class="form-floating">
+                        <textarea class="form-control" id="quote" placeholder="Favorite movie quote" name="Favorite quote"></textarea>
+                        <label for="Favorite quote">Favorite movie quote</label>
+                        <div class="invalid" id="textareaInvalid">Invalid input</div>
+                    </div>
+                </fieldset>
+                <button type="button" class="btn btn-primary" id="submit" onclick="">Submit</button>
+                <button type="button" class="btn btn-primary" id="reset">Reset</button>
+            </form>
+            <div id="formResult"></div>
+        </div>
+        <script src="https://code.jquery.com/qunit/qunit-2.17.2.js"></script>
+
+        <script>
+            QUnit.module('ConcatArrayOfWords(words)', function() {
+                QUnit.test("Does_ConcatArrayOfWords_Exist", function(assert) {
+                    // Arrange
+                    var words = ["test", "test1", "test2"];
+                    
+                    // Act
+                
+                    
+                    // Assert
+                    assert.ok(ConcatArrayOfWords(words), "Function exists");
+                });
+
+                QUnit.test("Does_ConcatArrayOfWords_Work_On_Intended_Path", function(assert) {
+                    // Arrange
+                    var array = ["I", "like", "cheese"];
+                    var expectedResult = "I like cheese";
+
+                    // Act
+                    var actualResult = ConcatArrayOfWords(array);
+
+                    // Assert
+                    assert.equal(actualResult, expectedResult, "Returns the correct string");
+                });
+
+                QUnit.test("Does_ConcatArrayOfWords_Fail_On_Unintended_Path", function(assert) {
+                    // Arrange
+                    var notAnArray = 42;
+                    var arrayOfNumbers = [343, 420, 69];
+                    var nullParameter = null;
+                    var expectedResult = "Parameter must be an array of type string.";
+
+                    // Act
+                    var notAnArrayResult = ConcatArrayOfWords(notAnArray);
+                    var arrayOfNumbersResult = ConcatArrayOfWords(arrayOfNumbers);
+                    var nullParameterResult = ConcatArrayOfWords(nullParameter);
+
+                    // Assert
+                    assert.equal(notAnArrayResult, expectedResult, "Function fails gracefully if the passed-in parameter is not an array");
+                    assert.equal(arrayOfNumbersResult, expectedResult, "Function fails gracefully if the passed-in parameter is an array of a type that is not string");
+                    assert.equal(nullParameterResult, expectedResult, "Function fails gracefully if the passed-in parameter is null");
+                });
+            });
+
+            QUnit.module('ConcatAndReverseArrayOfWords(array)', function() {
+                QUnit.test("Does_ConcatAndReverseArrayOfWords_Exist", function(assert) {
+                    // Arrange
+                    var array = [];
+
+                    // Act
+
+
+                    // Assert
+                    assert.ok(ConcatAndReverseArrayOfWords(array), "Function exists");
+                });
+
+                QUnit.test("Does_ConcatAndReverseArrayOfWords_Work_On_Intended_Path", function(assert) {
+                    // Arrange
+                    var array = ["sometimes", "mad", "little", "a", "go", "all", "We"];
+                    var expectedResult = "We all go a little mad sometimes";
+
+                    // Act
+                    var actualResult = ConcatAndReverseArrayOfWords(array);
+
+                    // Assert
+                    assert.equal(actualResult, expectedResult, "Returns the correct string");
+                });
+
+                QUnit.test("Does_ConcatAndReverseArrayOfWords_Fail_On_Unintended_Path", function(assert) {
+                    // Arrange
+                    var notAnArray = 42;
+                    var arrayOfNumbers = [343, 420, 69];
+                    var nullParameter = null;
+                    var expectedResult = "Parameter must be an array of type string.";
+
+                    // Act
+                    var notAnArrayResult = ConcatAndReverseArrayOfWords(notAnArray);
+                    var arrayOfNumbersResult = ConcatAndReverseArrayOfWords(arrayOfNumbers);
+                    var nullParameterResult = ConcatAndReverseArrayOfWords(nullParameter);
+
+                    // Assert
+                    assert.equal(notAnArrayResult, expectedResult, "Function fails gracefully if the passed-in parameter is not an array");
+                    assert.equal(arrayOfNumbersResult, expectedResult, "Function fails gracefully if the passed-in parameter is an array of a type that is not string");
+                    assert.equal(nullParameterResult, expectedResult, "Function fails gracefully if the passed-in parameter is null");
+                });
+            });
+
+            QUnit.module('CheckForWordInSentence(sentence, word)', function () {
+                QUnit.test("Does_CheckForWordInSentence_Exist", function (assert) {
+                    //Arrange
+                    var word = "";
+                    var sentence = "";
+                    ///Act 
+
+                    ///Assert
+                    assert.ok(CheckForWordInSentence(sentence, word), "Function Exists");
+                });
+                QUnit.test("Does_CheckForWordInSentence_Work_On_Intended_Path", function (assert) {
+                    ///Arrange
+                    var sentence = "I think Dune is the best movie.";
+                    var word = "Dune";
+                    var expectedResult = true;
+
+                    ///Act 
+                    var actualResult = CheckForWordInSentence(sentence, word);
+
+                    /// Assert 
+                    assert.equal(actualResult, expectedResult, "Returns the correct word");
+                });
+
+                QUnit.test("Does_CheckForWordInSentence_Fail_On_Unintended_Path", function (assert) {
+                    var notTheWord = "dun";
+                    var sentence = "dne is the best movie";
+                    var expectedResult = false;
+
+                    var theWrongWord = CheckForWordInSentence(notTheWord);
+                    var sentenceResult = CheckForWordInSentence(sentence);
+
+                    assert.equal(theWrongWord, expectedResult, "Function fails gracefully if the passed in word is not the correct word");
+                    assert.equal(sentenceResult, expectedResult, "Function fails gracefully if the passed in string does not have the correct word");
+                });
+            });           
+
+            QUnit.module("ValidateInputIsSpecifiedType(input, type)", function() {
+                QUnit.test("Does_ValidateInputIsSpecifiedType_Exist", function(assert) {
+                    // Arrange
+                    var genericVariable;
+
+                    // Act
+
+
+                    // Assert
+                    assert.ok(ValidateInputIsSpecifiedType(genericVariable), "Function exists");
+                });
+
+                QUnit.test("Does_ValidateInputIsSpecifiedType_Work_On_Intended_Path", function(assert) {
+                    // Arrange
+                    var string = "No, I am your father.";
+                    var number = 42;
+                    var boolean = false;
+                    var undefined;
+                    var expected = true;
+
+                    // Act
+                    var stringResult = ValidateInputIsSpecifiedType(string, "string");
+                    var numberResult = ValidateInputIsSpecifiedType(number, "number");
+                    var booleanResult = ValidateInputIsSpecifiedType(boolean, "boolean");
+                    var undefinedResult = ValidateInputIsSpecifiedType(undefined, "undefined");
+
+                    // Assert
+                    assert.equal(stringResult, expected, "String input validates as string");
+                    assert.equal(numberResult, expected, "Number input validates as number");
+                    assert.equal(booleanResult, expected, "Bool input validates as bool");
+                    assert.equal(undefinedResult, expected, "Undefined input validates as undefined");
+                });
+
+                QUnit.test("Does_ValidateInputIsSpecifiedType_Fail_On_Unintended_Path", function(assert) {
+                    // Arrange
+                    var notAString = 69;
+                    var notANumber = "42";
+                    var notABoolean;
+                    var notUndefined = true;
+                    var notAcceptedType = ["Mid", "State", "Technical", "College"];
+                    var expected = false;
+                    var notAcceptedTypeExpected = "Possible values for the type parameter include: string, number, boolean, undefined";
+
+                    // Act
+                    var stringResult = ValidateInputIsSpecifiedType(notAString, "string");
+                    var numberResult = ValidateInputIsSpecifiedType(notANumber, "number");
+                    var booleanResult = ValidateInputIsSpecifiedType(notABoolean, "boolean");
+                    var undefinedResult = ValidateInputIsSpecifiedType(notUndefined, "undefined");
+                    var notAcceptedTypeResult = ValidateInputIsSpecifiedType(notAcceptedType, "object");
+
+                    // Assert
+                    assert.equal(stringResult, expected, "Non-string input does not validate as string");
+                    assert.equal(numberResult, expected, "Non-number input does not validate as number");
+                    assert.equal(booleanResult, expected, "Non-bool input does not validate as bool");
+                    assert.equal(undefinedResult, expected, "Non-undefined input does not validate as undefined");
+                    assert.equal(notAcceptedTypeResult, notAcceptedTypeExpected, "Not accepted type returns an error message");
+                });
+            });           
+            
+            QUnit.module("AddArrayOfNumbers(numbers)", function () {
+                QUnit.test("Does_AddArrayOfNumbers_Exist", function (assert) {
+                    /// Arrange
+                    var array = [10, 20,30];
+
+                    /// Act
+
+
+                    ///Assert 
+                    assert.ok(AddArrayOfNumbers(array), "Function exists.");
+                });
+                QUnit.test("Does_AddArrayOfNumbers_Work_On_Intended_Path", function (assert) {
+                    var array = [10, 20, 30];
+                    var expected = 60;
+
+                    /// Act
+                    var actualResult = AddArrayOfNumbers(array);
+
+                    ///Assert
+                    assert.equal(actualResult, expected, "Function adds the number correctly");
+
+                });
+
+                QUnit.test("Does_AddArrayOfNumber_Fail_On_Unintended_Path", function (assert) {
+                    ///Arrange
+                    var notANumber = "Hi friend";
+                    var expected = false;
+
+                    ///Act
+                    var notANumberResult = AddArrayOfNumbers(notANumber);
+
+
+                    ///Assert
+                    assert.equal(notANumberResult, expected, "Function fails gracefully if not a number is entered");
+                });
+            });
+
+            QUnit.module("ValidateDateInput(input, invalid)", function() {
+                QUnit.test("Does_ValidateDateInput_Exist", function(assert) {
+                    // Arrange
+                    var date = "birthDate"
+                    var invalid = "dateInvalid";
+                    document.getElementById("birthDate").value = "2021-11-04";
+
+                    // Act
+
+                    // Assert
+                    assert.ok(ValidateDateInput(date, invalid), "Function exists")
+                })
+
+                QUnit.test("Does_ValidateDateInput_Work_On_Intended_Path", function(assert) {
+                    // Arrange
+                    var date = "birthDate"
+                    var invalid = "dateInvalid";
+                    document.getElementById("birthDate").value = "2021-11-04";
+                    var expected = true;
+
+                    // Act
+                    var actual = ValidateDateInput(date, invalid);
+
+                    // Assert
+                    assert.equal(actual, expected, "Function validates correctly");
+                })
+
+                QUnit.test("Does_ValidateDateInput_Fail_If_Date_Is_In_The_Future", function(assert) {
+                    // Arrange
+                    var date = "birthDate"
+                    var invalid = "dateInvalid";
+                    document.getElementById("birthDate").value = "2022-11-04";
+                    var expected = false;
+                    
+                    // Act
+                    var actual = ValidateDateInput(date, invalid);
+
+                    // Assert
+                    assert.equal(actual, expected, "Function returns false if the date is in the future");
+                })
+
+                QUnit.test("Does_ValidateDateInput_Fail_If_Date_Is_Before_1900", function(assert) {
+                    // Arrange
+                    var date = "birthDate"
+                    var invalid = "dateInvalid";
+                    document.getElementById("birthDate").value = "1890-11-04";
+                    var expected = false;
+                    
+                    // Act
+                    var actual = ValidateDateInput(date, invalid);
+
+                    // Assert
+                    assert.equal(actual, expected, "Function returns false if the date is before 1900");
+                })
+
+                QUnit.test("Does_ValidateDateInput_Fail_If_Date_Is_null", function(assert) {
+                    // Arrange
+                    var date = "birthDate"
+                    var invalid = "dateInvalid";
+                    document.getElementById("birthDate").value = null;
+                    var expected = false;
+                    
+                    // Act
+                    var actual = ValidateDateInput(date, invalid);
+
+                    // Assert
+                    assert.equal(actual, expected, "Function returns false if the date is null");
+                })
+            })
+
+            QUnit.module("ValidateSelectList(input, invalid)", function() {
+                QUnit.test("Does_ValidateSelectList_Exist", function(assert) {
+                    // Arrange
+                    var selectList = "state";
+                    var invalid = "stateInvalid";
+                    document.getElementById(selectList).value = "AL";
+
+                    // Act
+
+
+                    // Assert
+                    assert.ok(ValidateSelectList(selectList, invalid), "Function exists");
+                })
+
+                QUnit.test("Does_ValidateSelectList_Work_On_Intended_Path", function(assert) {
+                    // Arrange
+                    var selectList = "state";
+                    var invalid = "stateInvalid";
+                    document.getElementById(selectList).value = "WI";
+                    var expected = true;
+
+                    // Act
+                    var actual = ValidateSelectList(selectList, invalid);
+
+                    // Assert
+                    assert.equal(actual, expected, "Function returns true if a state is selected");
+                })
+
+                QUnit.test("Does_ValidateSelectList_Fail_On_Unintended_Path", function(assert) {
+                    // Arrange
+                    var selectList = "state";
+                    var invalid = "stateInvalid";
+                    document.getElementById(selectList).value = "---";
+                    var expected = false;
+
+                    // Act
+                    var actual = ValidateSelectList(selectList, invalid);
+
+                    // Assert
+                    assert.equal(actual, expected, "Function returns false if a state is not selected");
+                })
+            })
+
+            QUnit.module("ValidateValidateNameInput(input,invalid)", function () {
+                QUnit.test("Does_ValidateNameInput_Exist", function (assert) {
+                    // Arrange
+                    var name = "name";
+                    var invalid = "textInvalid";
+                    document.getElementById(name).value = "Isaac Engelkes";
+
+                    // Act
+
+
+                    // Assert
+                    assert.ok(ValidateNameInput(name, invalid), "Function exists");
+                })
+
+                QUnit.test("Does_ValidateNameInput_Work_On_Intended_Path", function (assert) {
+                    // Arrange
+                    var name = "name";
+                    var invalid = "textInvalid";
+                    document.getElementById(name).value = "Isaac Engelkes";
+                    var expected = true;
+
+                    // Act
+                    var actual = ValidateNameInput(name, invalid);
+
+                    // Assert 
+                    assert.equal(actual, expected, "Function returns true if name is correct.");
+                })
+
+                QUnit.test("Does_ValidateNameInput_Fail_If_Name_Is_Null", function (assert) {
+                    // Arrange
+                    var name = "name";
+                    var invalid = "textInvalid";
+                    document.getElementById(name).value = null;
+                    var expected = false;
+
+                    // Act
+                    var actual = ValidateNameInput(name, invalid);
+
+                    // Assert 
+                    assert.equal(actual, expected, "Function returns false if name is submited with a blank space");
+
+                })
+
+                QUnit.test("Does_ValidateNameInput_Fail_If_Name_Is_A_Number", function (assert) {
+                    // Arrange
+                    var name = "name";
+                    var invalid = "textInvalid";
+                    document.getElementById(name).value = "999";
+                    var expected = false;
+
+                    // Act
+                    var actual = ValidateNameInput(name, invalid);
+
+                    // Assert 
+                    assert.equal(actual, expected, "Function returns false if name is submited with a number.");
+
+                })
+            })
+
+            QUnit.module("ValidatePhoneNumber(input, invalid)", function () {
+                QUnit.test("Does_ValidatePhoneNumber_Exist", function (assert) {
+                    // Arrange
+                    var phoneNumber = "phoneNumber";
+                    var invalid = "phoneInvalid";
+                    document.getElementById(phoneNumber).value = "715-347-7777";
+
+                    // Act
+
+                    // Assert
+                    assert.ok(ValidatePhoneNumber(phoneNumber, invalid), "Function exists");
+
+
+                })
+                QUnit.test("Does_ValidatePhoneNumber_Work_On_Intended_Path", function (assert) {
+                    // Arrange
+                    var phoneNumber = "phoneNumber";
+                    var invalid = "phoneInvalid";
+                    document.getElementById(phoneNumber).value = "715-347-5555";
+                    var expected = true;
+
+                    // Act
+                    var actual = ValidatePhoneNumber(phoneNumber, invalid);
+
+                    // Assert 
+                    assert.equal(actual, expected, "Function returns true if phone number is valid.");
+                })
+
+                QUnit.test("Does_ValidatePhoneNumber_Work_Fail_if_Null", function (assert) {
+                    // Arrange
+                    var phoneNumber = "phoneNumber";
+                    var invalid = "phoneInvalid";
+                    document.getElementById(phoneNumber).value = null;
+                    var expected = false;
+
+                    // Act
+                    var actual = ValidatePhoneNumber(phoneNumber, invalid);
+
+                    // Assert 
+                    assert.equal(actual, expected, "Function returns false if phone number is null");
+                })
+
+                QUnit.test("Does_ValidatePhoneNumber_Work_Fail_if_String", function (assert) {
+                    // Arrange
+                    var phoneNumber = "phoneNumber";
+                    var invalid = "phoneInvalid";
+                    document.getElementById(phoneNumber).value = "Dune";
+                    var expected = false;
+
+                    // Act
+                    var actual = ValidatePhoneNumber(phoneNumber, invalid);
+
+                    // Assert 
+                    assert.equal(actual, expected, "Function returns false if phone number is a string");
+                })
+            })
+
+            QUnit.module("ValidateNumberInput(input, invalid", function () {
+                QUnit.test("Does_ValidateNumberInput_Exist", function (assert) {
+                    // Arrange
+                    var number = "number";
+                    var invalid = "numberInvalid";
+                    document.getElementById(number).value = 5;
+
+                    // Act
+
+                    // Assert
+                    assert.ok(ValidateNumberInput(number, invalid), "Function exists");
+
+
+                })
+                QUnit.test("Does_ValidateNumberInput_Work_On_Intended_Path", function (assert) {
+                    // Arrange
+                    var number = "number";
+                    var invalid = "numberInvalid";
+                    document.getElementById(number).value = 5;
+                    var expected = true;
+
+                    // Act
+                    var actual = ValidateNumberInput(number, invalid);
+
+                    // Assert
+                    assert.equal(actual, expected, "Function returns true if a number is entered.");
+
+
+                })
+                QUnit.test("Does_ValidateNumberInput_Fail_If_Input_Is_Null", function (assert) {
+                    // Arrange
+                    var number = "number";
+                    var invalid = "numberInvalid";
+                    document.getElementById(number).value = null;
+                    var expected = false;
+
+                    // Act
+                    var actual = ValidateNumberInput(number, invalid);
+
+                    // Assert
+                    assert.equal(actual, expected, "Function returns false if null.");
+
+
+                })
+                QUnit.test("Does_ValidateNumberInput_Fail_If_Input_Is_Over_1000", function (assert) {
+                    // Arrange
+                    var number = "number";
+                    var invalid = "numberInvalid";
+                    document.getElementById(number).value = 1001;
+                    var expected = false;
+
+                    // Act
+                    var actual = ValidateNumberInput(number, invalid);
+
+                    // Assert
+                    assert.equal(actual, expected, "Function returns false if number is over 1000.");
+
+
+                })
+                QUnit.test("Does_ValidateNumberInput_Fail_If_Input_Is_Under_0", function (assert) {
+                    // Arrange
+                    var number = "number";
+                    var invalid = "numberInvalid";
+                    document.getElementById(number).value = -1;
+                    var expected = false;
+
+                    // Act
+                    var actual = ValidateNumberInput(number, invalid);
+
+                    // Assert
+                    assert.equal(actual, expected, "Function returns false if number is under 0.");
+
+
+                })
+            })
+
+            QUnit.module("ValidateFormSubmit(action, valid, invalid)", function() {
+                QUnit.test("Does_ValidateFormSubmit_Exist", function(assert) {
+                    // Arrange
+                    var action = "formResult";
+                    var valid = "Congratulations! <br />Your application has been submitted.";
+                    var invalid = "Please fill out all required fields";
+
+                    document.getElementById("birthDate").value = "2021-11-04";
+                    document.getElementById("state").value = "AL";
+                    document.getElementById("name").value = "Isaac Engelkes";
+                    document.getElementById("phoneNumber").value = "715-347-7777";
+                    document.getElementById("number").value = 5;
+
+                    // Act
+
+
+                    // Assert
+                    assert.ok(ValidateFormSubmit(action, valid, invalid), "Function exists");
+                })
+
+                QUnit.test("Does_ValidateFormSubmit_Pass_If_All_Fields_Are_Valid", function(assert) {
+                    // Arrange
+                    var action = "formResult";
+                    var valid = "Congratulations! <br />Your application has been submitted.";
+                    var invalid = "Please fill out all required fields";
+                    var expected = true;
+
+                    document.getElementById("birthDate").value = "2021-11-04";
+                    document.getElementById("state").value = "AL";
+                    document.getElementById("name").value = "Isaac Engelkes";
+                    document.getElementById("phoneNumber").value = "715-347-7777";
+                    document.getElementById("number").value = 5;
+
+                    // Act
+                    var actual = ValidateFormSubmit(action, valid, invalid);
+
+                    // Assert
+                    assert.equal(expected, actual, "Function returns true if all fields are valid");
+                })
+
+                QUnit.test("Does_ValidateFormSubmit_Fail_If_Name_Is_Invalid", function(assert) {
+                    // Arrange
+                    var action = "formResult";
+                    var valid = "Congratulations! <br />Your application has been submitted.";
+                    var invalid = "Please fill out all required fields";
+                    var expected = false;
+
+                    document.getElementById("birthDate").value = "2021-11-04";
+                    document.getElementById("state").value = "AL";
+                    document.getElementById("name").value = 42;
+                    document.getElementById("phoneNumber").value = "715-347-7777";
+                    document.getElementById("number").value = 5;
+
+                    // Act
+                    var actual = ValidateFormSubmit(action, valid, invalid);
+
+                    // Assert
+                    assert.equal(expected, actual, "Function returns false if the name field is invalid");
+                })
+
+                QUnit.test("Does_ValidateFormSubmit_Fail_If_Date_Is_Invalid", function(assert) {
+                    // Arrange
+                    var action = "formResult";
+                    var valid = "Congratulations! <br />Your application has been submitted.";
+                    var invalid = "Please fill out all required fields";
+                    var expected = false;
+
+                    document.getElementById("birthDate").value = "1800-11-04";
+                    document.getElementById("state").value = "AL";
+                    document.getElementById("name").value = "Isaac Engelkes";
+                    document.getElementById("phoneNumber").value = "715-347-7777";
+                    document.getElementById("number").value = 5;
+
+                    // Act
+                    var actual = ValidateFormSubmit(action, valid, invalid);
+
+                    // Assert
+                    assert.equal(expected, actual, "Function returns false if the date field is invalid");
+                })
+
+                QUnit.test("Does_ValidateFormSubmit_Fail_If_Phone_Number_Is_Invalid", function(assert) {
+                    // Arrange
+                    var action = "formResult";
+                    var valid = "Congratulations! <br />Your application has been submitted.";
+                    var invalid = "Please fill out all required fields";
+                    var expected = false;
+
+                    document.getElementById("birthDate").value = "2021-11-04";
+                    document.getElementById("state").value = "AL";
+                    document.getElementById("name").value = "Isaac Engelkes";
+                    document.getElementById("phoneNumber").value = null;
+                    document.getElementById("number").value = 5;
+
+                    // Act
+                    var actual = ValidateFormSubmit(action, valid, invalid);
+
+                    // Assert
+                    assert.equal(expected, actual, "Function returns false if the phone number field is invalid");
+                })
+
+                QUnit.test("Does_ValidateFormSubmit_Fail_If_State_Is_Invalid", function(assert) {
+                    // Arrange
+                    var action = "formResult";
+                    var valid = "Congratulations! <br />Your application has been submitted.";
+                    var invalid = "Please fill out all required fields";
+                    var expected = false;
+
+                    document.getElementById("birthDate").value = "2021-11-04";
+                    document.getElementById("state").value = "---";
+                    document.getElementById("name").value = "Isaac Engelkes";
+                    document.getElementById("phoneNumber").value = "715-347-7777";
+                    document.getElementById("number").value = 5;
+
+                    // Act
+                    var actual = ValidateFormSubmit(action, valid, invalid);
+
+                    // Assert
+                    assert.equal(expected, actual, "Function returns false if the state field is invalid");
+                })
+
+                QUnit.test("Does_ValidateFormSubmit_Fail_If_Number_Is_Invalid", function(assert) {
+                    // Arrange
+                    var action = "formResult";
+                    var valid = "Congratulations! <br />Your application has been submitted.";
+                    var invalid = "Please fill out all required fields";
+                    var expected = false;
+
+                    document.getElementById("birthDate").value = "2021-11-04";
+                    document.getElementById("state").value = "AL";
+                    document.getElementById("name").value = "Isaac Engelkes";
+                    document.getElementById("phoneNumber").value = "715-347-7777";
+                    document.getElementById("number").value = -5;
+
+                    // Act
+                    var actual = ValidateFormSubmit(action, valid, invalid);
+
+                    // Assert
+                    assert.equal(expected, actual, "Function returns false if the number field is invalid");
+                })
+            })
+
+        </script>
+        
+    </body>
+</html>
